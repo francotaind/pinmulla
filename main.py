@@ -1,7 +1,5 @@
 import random
 
-
-
 MAX_LINES = 3
 MAX_STAKE = 1000
 MIN_STAKE = 50
@@ -16,7 +14,6 @@ symbol_count = {
     "D": 8
 }
 
-
 symbol_value = {
     "A": 5,
     "B": 4,
@@ -24,9 +21,7 @@ symbol_value = {
     "D": 2
 }
 
-
-
-def check_winnings(columns, lines, bet, values):
+def check_winnings(columns, lines, stake, values):
     winnings = 0
     winning_lines = []
     for line in range(lines):
@@ -36,19 +31,9 @@ def check_winnings(columns, lines, bet, values):
             if symbol != symbol_to_check:
                 break
             else:
-                winnings += values[symbol] * bet
-                winning_lines.append(line + 1)
-    
-    
-        return winnings, winning_lines
-
-
-
-
-
-
-
-
+                winnings += values[symbol] * stake
+                winning_lines.append(line + 1)    
+    return winnings, winning_lines
 
 def get_spin(rows, cols, symbols):
     all_symbols = []
@@ -73,11 +58,11 @@ def print_machine(columns):
     for row in range(len(columns[0])):
         for i, column in enumerate(columns):
             if i != len(columns) - 1:
-             print(column[row], end=" | ")
+                print(column[row], end=" | ")
             else:
-                print(column[row],)
+                print(column[row],end="")
 
-    #print()
+        print()
 
 def deposit():
     while True:
@@ -119,8 +104,6 @@ def get_stake():
                 print("enter stake")
     return stake
 
-
-
 def main():
     balance = deposit()
     lines = get_number_of_lines()
@@ -133,17 +116,14 @@ def main():
         else:
             break
 
-    #stake = get_stake()
     total_bet = stake * lines
     print(balance, lines, stake)
     print(f"you are staking KSH{stake} on {lines} lines. Total bet is {total_bet}")
-
-
 
     slots = get_spin(ROWS, COLS, symbol_count)
     print_machine(slots)
     winnings, winning_lines = check_winnings(slots, lines, stake, symbol_value)
     print(f"You won KSH {winnings}.")
-    print(f"You won on lines:", {*winning_lines})
+    print(f"You won on lines:", *winning_lines)
 
 main()
