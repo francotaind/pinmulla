@@ -1,8 +1,8 @@
 import random
+from deposit import deposit
+from stake import get_stake
 
 MAX_LINES = 3
-MAX_STAKE = 1000
-MIN_STAKE = 50
 
 ROWS = 3
 COLS = 3
@@ -21,7 +21,7 @@ symbol_value = {
     "D": 2
 }
 
-def check_winnings(columns, lines, bet, values):
+def check_winnings(columns, lines, stake, values):
     winnings = 0
     winning_lines = []
     for line in range(lines):
@@ -30,12 +30,12 @@ def check_winnings(columns, lines, bet, values):
             symbol_to_check = column[line]
             if symbol != symbol_to_check:
                 break
-            else:
-                winnings += values[symbol] * bet
-                winning_lines.append(line + 1)
+        else:
+            winnings += values[symbol] * stake
+            winning_lines.append(line + 1)
     
     
-        return winnings, winning_lines
+    return winnings, winning_lines
 
 def get_spin(rows, cols, symbols):
     all_symbols = []
@@ -66,20 +66,6 @@ def print_machine(columns):
 
     #print()
 
-def deposit():
-    while True:
-        amount = input("what would you like to deposit? KSH ")
-        if amount.isdigit():
-            amount = int(amount)
-            if amount > 0:
-                break
-            else:
-                print("amount greater than 0")
-        else:
-            print("please enter a number")
-    return amount
-
-
 def get_number_of_lines():
     while True:
         lines = input("enter number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
@@ -93,18 +79,7 @@ def get_number_of_lines():
             print("enter a number")
     return lines
 
-def get_stake():
-    while True:
-        stake = input("enter stake amount ")
-        if stake.isdigit():
-            stake = int(stake)
-            if MIN_STAKE <= stake <= MAX_STAKE:
-                break
-            else:
-                print(f"amount must be between {MIN_STAKE} - {MAX_STAKE}")
-        else:
-                print("enter stake")
-    return stake
+
 
 def spinned(balance):
     lines = get_number_of_lines()
@@ -128,7 +103,7 @@ def spinned(balance):
     print_machine(slots)
     winnings, winning_lines = check_winnings(slots, lines, stake, symbol_value)
     print(f"You won KSH {winnings}.")
-    print(f"You won on lines:", {*winning_lines})
+    print(f"You won on lines:",*winning_lines)
 
 
     return winnings - total_bet
