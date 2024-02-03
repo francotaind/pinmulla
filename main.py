@@ -1,7 +1,5 @@
 import random
 
-
-
 MAX_LINES = 3
 MAX_STAKE = 1000
 MIN_STAKE = 50
@@ -16,15 +14,12 @@ symbol_count = {
     "D": 8
 }
 
-
 symbol_value = {
     "A": 5,
     "B": 4,
     "C": 3,
     "D": 2
 }
-
-
 
 def check_winnings(columns, lines, bet, values):
     winnings = 0
@@ -41,14 +36,6 @@ def check_winnings(columns, lines, bet, values):
     
     
         return winnings, winning_lines
-
-
-
-
-
-
-
-
 
 def get_spin(rows, cols, symbols):
     all_symbols = []
