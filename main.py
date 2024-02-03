@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import random
 from deposit import deposit
 from stake import get_stake
