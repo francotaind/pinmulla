@@ -1,19 +1,20 @@
 import random
 import string
 
-print(random.randint(0, 20))
-print(random.choice(string.ascii_lowercase))
-
-#password = []
-#password.append(9)
-#print(f"{password}")
-
 password = []
 
-def passgen():
-    for i in range(1, 7):
-        password.append(i)
-        return password
+for _ in range(2):
+    password += (random.choice(string.ascii_uppercase))
 
-print(f"{password}")
-passgen()
+p = (random.randint(100, 999))
+password.append(p)
+
+x = (random.choice(string.punctuation))
+password.append(x)
+
+for _ in range(3):
+    password += (random.choice(string.ascii_lowercase))
+
+pass_gen = "".join(str(element) for element in password)
+
+print(pass_gen)
