@@ -3,20 +3,14 @@
 import random
 import string
 
-password = []
+uppercase = random.sample(string.ascii_uppercase, k=3)
+digit = [random.randint(0,9) for _ in range(3)]
+special_char = random.sample(string.punctuation, k=3)
+lowercase = random.sample(string.ascii_lowercase, k=3)
 
-for _ in range(3):
-    password += (random.choice(string.ascii_uppercase))
+passwd = uppercase+digit+special_char+lowercase
+random.shuffle(passwd)
 
-p = (random.randint(100, 999))
-password.append(p)
-
-for _ in range(3):
-    password += (random.choice(string.punctuation))
-
-for _ in range(3):
-    password += (random.choice(string.ascii_lowercase))
-
-pass_gen = "".join(str(element) for element in password)
+pass_gen = "".join(map(str, passwd))
 
 print(pass_gen)
